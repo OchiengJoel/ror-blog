@@ -1,0 +1,21 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<h1>Articles</h1>
+<%= link_to "Create New Article", new_article_path %>
+<p><strong> Our Blog Has <%= Article.public_count %> Articles and Counting.....! </strong></p>
+<ul>
+  <% @articles.each do |article|%>
+    <% unless article.archived? %>
+      <li>
+        <h3><%= article.title %></h3>
+      </li>
+    <%end %>
+    <%
+=begin%>
+    <a href="/articles/<%= #article.id %>"> Show Post </a>
+    <%
+=end%>
+    <%= link_to "Show Post", article_path(article) %>
+  <% end %>
+</ul>
