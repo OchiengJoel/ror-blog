@@ -1,19 +1,22 @@
 <h1> <%=  @article.title%> </h1>
 <p> <%= @article.content %></p>
-<ul>
-  <li>
-    <%= link_to "Click Here To Edit Article", edit_article_path %>
-  </li>
-  <li><%= link_to "Delete Article", article_path, data: {
+
+
+<div class="d-inline-flex gap-2 mb-5">
+<%= button_to "Edit Article", edit_article_path, method: :get, class:"d-inline-flex align-items-center btn btn-secondary btn-sm px-4 rounded-pill" %>
+<%= button_to "Delete Article", article_path, method: :delete, class:"d-inline-flex align-items-center btn btn-danger btn-sm px-4 rounded-pill", data: {
         turbo_method: :delete,
         turbo_confirm: "Are You Sure?"
         } %>
-  </li>
-</ul>
+
+</div>
+
 
 <h2>Comments</h2>
 <%= render @article.comments %>
 
 
-<h2>Add New Comment</h2>
+<h5>Add New Comment</h5>
 <%= render 'comments/form' %>
+
+

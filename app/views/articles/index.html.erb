@@ -1,21 +1,23 @@
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
-<h1>Articles</h1>
-<%= link_to "Create New Article", new_article_path %>
-<p><strong> Our Blog Has <%= Article.public_count %> Articles and Counting.....! </strong></p>
-<ul>
-  <% @articles.each do |article|%>
-    <% unless article.archived? %>
-      <li>
-        <h3><%= article.title %></h3>
-      </li>
-    <%end %>
-    <%
-=begin%>
-    <a href="/articles/<%= #article.id %>"> Show Post </a>
-    <%
-=end%>
-    <%= link_to "Show Post", article_path(article) %>
+<div class="container px-4 py-5" id="hanging-icons">
+  <h1 class="pb-2 border-bottom">Articles</h1>
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
   <% end %>
-</ul>
+  <%= button_to "Create New Article", new_article_path, method: :get, class: "d-inline-flex align-items-center btn btn-primary btn-sm px-4 rounded-pill" %>
+  <p class="col-lg-8 mx-auto fs-5 text-muted"><strong> So Far So Good, It's <%= Article.public_count %> Articles and Counting.....! </strong></p>
+  <div class="row g-4 py-5">
+    <% @articles.each do |article| %>
+      <% unless article.archived? %>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= article.title %></h5>
+              <p class="card-text">Add content here...</p>
+              <%= link_to "Show Post", article_path(article), class: "btn btn-primary btn-sm" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
